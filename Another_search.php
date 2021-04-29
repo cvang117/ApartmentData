@@ -3,15 +3,18 @@
 
 $connect = new PDO("mysql:host=localhost;dbname=apartments", "root", "");
 	
-$query = "SELECT DISTINCT Tenant_Apartment FROM tenant ORDER BY Tenant_Name ASC";
+$query = "SELECT DISTINCT Tenant_Name FROM tenant ORDER BY Tenant_Name ASC";
+//$query = "SELECT DISTINCT Apartment_Name FROM apartment ORDER BY Apartment_Name ASC";
 
 $statement = $connect->prepare($query);
 
 $statement->execute();
 
 $result = $statement->fetchAll();
+	
 
 ?>
+
 <html>
  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -26,15 +29,101 @@ $result = $statement->fetchAll();
  <body>
   <div class="container">
    <br />
-   <h2 align="center">Search Function</h2><br />
-   
-   <select name="multi_search_filter" id="multi_search_filter" multiple class="form-control selectpicker">
-   <?php
+   <h2 align="center">Tenant List</h2><br />
+
+<!--
+<body>
+	<form action="backend-search.php" method="GET">
+		<input type="text" name="query" />
+		<input type="submit" value="Search" />
+	</form>
+	
+</body>
+
+-->
+<style>
+    body{
+        font-family: Arail, sans-serif;
+    }
+    /* Formatting search box */
+    .search-box{
+        width: 1000px;
+        position: relative;
+        display: inline-block;
+        font-size: 18px;
+    }
+    .search-box input[type="text"]{
+        height: 48px;
+        padding: 5px 10px;
+        border: 1px solid #CCCCCC;
+        font-size: 18px;
+    }
+    .result{
+        position: absolute;        
+        z-index: 999;
+        top: 100%;
+        left: 0;
+		background-color : #f8f8ff; 
+    }
+    .search-box input[type="text"], .result{
+        width: 100%;
+        box-sizing: border-box;
+    }
+    /* Formatting result items */
+    .result p{
+        margin: 0;
+        padding: 7px 10px;
+        border: 1px solid #CCCCCC;
+        border-top: none;
+        cursor: pointer;
+    }
+    .result p:hover{
+        background: #f2f2f2;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('.search-box input[type="text"]').on("keyup input", function(){
+        var inputVal = $(this).val();
+        var resultDropdown = $(this).siblings(".result");
+        if(inputVal.length){
+            $.get("backend-search.php", {term: inputVal}).done(function(data){
+                resultDropdown.html(data);
+            });
+        } else{
+            resultDropdown.empty();
+        }
+    });
+    
+    $(document).on("click", ".result p", function(){
+        $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
+        $(this).parent(".result").empty();
+    });
+});
+</script>
+
+</head>
+<body>
+    <div class="search-box">
+        <input type="text" autocomplete="off" placeholder="Search name" />
+        <div class="result"></div>
+    </div>
+</body>
+</head>
+</html>
+  
+  <!--<select name="multi_search_filter" id="multi_search_filter" multiple class="form-control selectpicker">-->
+
+  <?php
+  /*
    foreach($result as $row)
    {
-    echo '<option value="'.$row["Tenant_Apartment"].'">'.$row["Tenant_Apartment"].'</option>'; 
+    echo '<option value="'.$row["Tenant_Name"].'">'.$row["Tenant_Name"].'</option>'; 
    }
+   */
    ?>
+   
    </select>
    <input type="hidden" name="hidden_Tenant_Apartment" id="hidden_Tenant_Apartment" />
    <div style="clear:both"></div>
@@ -46,7 +135,9 @@ $result = $statement->fetchAll();
        <th>Tenant Name</th>
        <th>SSN</th>
        <th>Phone</th>
-       <th>Apartment</th>
+       <th>Apartment Number</th>
+	   <th>Apartment Name</th>
+	   <th>Signed Date</th>
       </tr>
      </thead>
      <tbody>
@@ -87,4 +178,6 @@ $(document).ready(function(){
  
 });
 </script>
+
+
 

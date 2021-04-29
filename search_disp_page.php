@@ -43,7 +43,7 @@ while ($row = mysqli_fetch_array($result))
 	//$Tenant_Apartment = $_POST['Tenant_Apartment'];
 
 
-	$sql = "SELECT * FROM tenant WHERE Tenant_Name LIKE '%search%%'
+	$sql = "SELECT * FROM tenant WHERE Tenant_Name LIKE '%search%'
 	OR Tenant_Apartment LIKE '%search%'";
 	$result = mysqli_query($conn, $sql);
 
@@ -75,3 +75,6 @@ while ($row = mysql_fetch_assoc($result)) {
 mysqli_close($conn);
 	
     ?>
+	
+	
+	<input type="button" value="Back" onclick="history.back()">
