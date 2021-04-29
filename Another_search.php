@@ -11,8 +11,16 @@ $statement = $connect->prepare($query);
 $statement->execute();
 
 $result = $statement->fetchAll();
-	
 
+/*
+$sql = "SELECT COUNT(DISTINCT Tenant_Name) FROM tenant";
+if(mysqli_query($connect, $query)){
+	echo "Tenant_Name";
+}else{
+	echo "Not available";
+}
+
+*/
 ?>
 
 <html>
