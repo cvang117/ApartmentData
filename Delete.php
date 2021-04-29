@@ -15,21 +15,18 @@
 	}  
 	echo 'Connected successfully<br/>';  
 	
-	//$Tenant_Name = $_POST['Tenant_Name'];
+	$Tenant_Name = $_POST['Tenant_Name'];
 	$Tenant_SSN = $_POST['Tenant_SSN'];
-	//$Tenant_Phone = $_POST['Tenant_Phone'];
-	//$Tenant_Apartment = $_POST['Tenant_Apartment'];
+	$Tenant_Phone = $_POST['Tenant_Phone'];
+	$Tenant_Apartment = $_POST['Tenant_Apartment'];
 	
 	//$sql = "INSERT INTO tenant(Tenant_Name,Tenant_SSN,Tenant_Phone, Tenant_Apartment)
 	//VALUES ('$Tenant_Name', '$Tenant_SSN', '$Tenant_Phone', '$Tenant_Apartment')";  	
 	$sql = "DELETE from tenant WHERE Tenant_SSN = '$Tenant_SSN' OR Tenant_Apartment = '$Tenant_Apartment'
 	OR Tenant_Name = 'Tenant_Name' OR Tenant_Phone = 'Tenant_Phone'";
-	//$sql = "TRIGGER `Evicted` AFTER DELETE ON `tenant` FOR EACH ROW INSERT INTO evicted_tenant 
-	//VALUES(\'Tenant_Name\', \'Tenant_SSN\', \'Tenant_Phone\', \'Tenant_Apartment\', NOW())";
-
 	
 	if(mysqli_query($conn, $sql)){  
-		echo "Record deletion successfully";
+		echo "Record deletion successfully";  
 	}else{  
 		echo "Could not delete record: ". mysqli_error($conn);  
 	}  
