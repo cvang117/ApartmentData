@@ -22,7 +22,7 @@
 	
 	//$sql = "INSERT INTO tenant(Tenant_Name,Tenant_SSN,Tenant_Phone, Tenant_Apartment)
 	//VALUES ('$Tenant_Name', '$Tenant_SSN', '$Tenant_Phone', '$Tenant_Apartment')";  	
-	$sql = "DELETE from tenant WHERE Tenant_SSN = '$Tenant_SSN' OR Tenant_Apartment = '$Tenant_Apartment'
+	$sql = "DELETE from tenant WHERE Tenant_SSN = '$Tenant_SSN'
 	OR Tenant_Name = 'Tenant_Name' OR Tenant_Phone = 'Tenant_Phone'";
 	//$sql = "TRIGGER `Evicted` AFTER DELETE ON `tenant` FOR EACH ROW INSERT INTO evicted_tenant 
 	//VALUES(\'Tenant_Name\', \'Tenant_SSN\', \'Tenant_Phone\', \'Tenant_Apartment\', NOW())";
